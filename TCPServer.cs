@@ -61,28 +61,28 @@ namespace TCP{
             }
         }
 
-        static void Random(StreamWriter writer,string[] splitMessage, Random random){
-            if(int.TryParse(splitMessage?[1].ToString(), out int firstResult)){
-                if(int.TryParse(splitMessage?[2].ToString(), out int secondResult)){
-                    writer.Write(random.Next(firstResult, secondResult + 1));
-                }
-            }
-        }
-
-        static void Add(StreamWriter writer, string[] splitMessage){
-            if(int.TryParse(splitMessage?[1], out int firstAdd)){
-                if(int.TryParse(splitMessage?[2].Trim(), out int secondAdd)){
-                    writer.Write(firstAdd + secondAdd);
-                }
-            }
-        }
-
-        static void Subtract(StreamWriter writer, string[] splitMessage){
-            if(int.TryParse(splitMessage?[1], out int firstSubtract)){
-                if(int.TryParse(splitMessage?[2].Trim(), out int secondSubtract)){
-                    writer.Write(firstSubtract - secondSubtract);
-                }
-            }
-        }
+        /*static void Random(StreamWriter writer,string[] splitMessage, Random random){*/
+        /*    if(int.TryParse(splitMessage?[1].ToString(), out int firstResult)){*/
+        /*        if(int.TryParse(splitMessage?[2].ToString(), out int secondResult)){*/
+        /*            writer.Write(random.Next(firstResult, secondResult + 1));*/
+        /*        }*/
+        /*    }*/
+        /*}*/
+        /**/
+        /*static void Add(StreamWriter writer, string[] splitMessage){*/
+        /*    if(int.TryParse(splitMessage?[1], out int firstAdd)){*/
+        /*        if(int.TryParse(splitMessage?[2].Trim(), out int secondAdd)){*/
+        /*            writer.Write(firstAdd + secondAdd);*/
+        /*        }*/
+        /*    }*/
+        /*}*/
+        /**/
+        /*static void Subtract(StreamWriter writer, string[] splitMessage){*/
+        /*    if(int.TryParse(splitMessage?[1], out int firstSubtract)){*/
+        /*        if(int.TryParse(splitMessage?[2].Trim(), out int secondSubtract)){*/
+        /*            writer.Write(firstSubtract - secondSubtract);*/
+        /*        }*/
+        /*    }*/
+        /*}*/
     }
 }
