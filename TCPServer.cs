@@ -12,6 +12,7 @@ namespace TCP{
                 StreamWriter writer = new(ns);
                 writer.AutoFlush = true;
 
+                Random random = new();
                 while(isRunning){
                     string? message = reader.ReadLine();
 
@@ -20,43 +21,78 @@ namespace TCP{
                             writer.Write(message);
                             break;
                         case "Random":
-                            Random random = new();
-                            writer.Write("Input numbers");
-
-                            string? toRandom = reader.ReadLine();
-                            string[]? splitToRandom = toRandom?.Split();
-
-                            if(int.TryParse(splitToRandom?[0], out int first)){
-                                if(int.TryParse(splitToRandom?[1].Trim(), out int second)){
-                                    if(first < second){
-                                        writer.Write(random.Next(first, second + 1));
-                                    }
-                                    else{
-                                        writer.Write("First number must be higher than the second number");
-                                    }
-                                }
-                                else{
-                                    writer.Write("Invalid input");
-                                }
-                            }
-                            else{
-                                writer.Write("Invalid input");
-                            }
+                            Random(writer,reader,random);
                             break;
                         case "Add":
-                            writer.Write("Input numbers");
-
-                            string? toAdd = reader.ReadLine();
-                            string[]? splitToAdd = toAdd?.Split();
+                            Add(writer,reader);
                             break;
                         case "Subtract":
-                            writer.Write("Input numbers");
-
-                            string? toSubtract = reader.ReadLine();
-                            string[]? splitToSubtract = toSubtract?.Split();
+                            Subtract(writer,reader);
                             break;
                     }
                 }
+            }
+        }
+
+        static void Random(StreamWriter writer, StreamReader reader,Random random){
+            writer.Write("Input numbers");
+
+            string? toRandom = reader.ReadLine();
+            string[]? splitToRandom = toRandom?.Split();
+
+            if(int.TryParse(splitToRandom?[0], out int firstRandom)){
+                if(int.TryParse(splitToRandom?[1].Trim(), out int secondRandom)){
+                    if(firstRandom < secondRandom){
+                        writer.Write(random.Next(firstRandom, secondRandom + 1));
+                    }
+                    else{
+                        writer.Write("First number must be higher than the second number");
+                    }
+                }
+                else{
+                    writer.Write("Invalid input");
+                }
+            }
+            else{
+                writer.Write("Invalid input");
+            }
+        }
+
+        static void Add(StreamWriter writer, StreamReader reader){
+            writer.Write("Input numbers");
+
+            string? toAdd = reader.ReadLine();
+            string[]? splitToAdd = toAdd?.Split();
+
+            if(int.TryParse(splitToAdd?[0], out int firstAdd)){
+                if(int.TryParse(splitToAdd?[1].Trim(), out int secondAdd)){
+                    writer.Write(firstAdd + secondAdd);
+                }
+                else{
+                    writer.Write("Invalid input");
+                }
+            }
+            else{
+                writer.Write("Invalid input");
+            }
+        }
+
+        static void Subtract(StreamWriter writer, StreamReader reader){
+            writer.Write("Input numbers");
+
+            string? toSubtract = reader.ReadLine();
+            string[]? splitToSubtract = toSubtract?.Split();
+
+            if(int.TryParse(splitToSubtract?[0], out int firstSubtract)){
+                if(int.TryParse(splitToSubtract?[1].Trim(), out int secondSubtract)){
+                    writer.Write(firstSubtract - secondSubtract);
+                }
+                else{
+                    writer.Write("Invalid input");
+                }
+            }
+            else{
+                writer.Write("Invalid input");
             }
         }
     }
