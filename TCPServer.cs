@@ -13,6 +13,7 @@ namespace TCP{
                 writer.AutoFlush = true;
 
                 Random random = new();
+
                 while(isRunning){
                     string? message = reader.ReadLine();
                     string[]? splitMessage = message?.Split();
@@ -40,12 +41,6 @@ namespace TCP{
                 if(int.TryParse(splitMessage?[2].ToString(), out int secondResult)){
                     writer.Write(random.Next(firstResult, secondResult + 1));
                 }
-                else{
-                    writer.Write("Invalid input");
-                }
-            }
-            else{
-                writer.Write("Invalid input");
             }
         }
 
@@ -54,12 +49,6 @@ namespace TCP{
                 if(int.TryParse(splitMessage?[2].Trim(), out int secondAdd)){
                     writer.Write(firstAdd + secondAdd);
                 }
-                else{
-                    writer.Write("Invalid input");
-                }
-            }
-            else{
-                writer.Write("Invalid input");
             }
         }
 
@@ -68,12 +57,6 @@ namespace TCP{
                 if(int.TryParse(splitMessage?[2].Trim(), out int secondSubtract)){
                     writer.Write(firstSubtract - secondSubtract);
                 }
-                else{
-                    writer.Write("Invalid input");
-                }
-            }
-            else{
-                writer.Write("Invalid input");
             }
         }
     }
