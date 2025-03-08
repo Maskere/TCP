@@ -33,13 +33,13 @@ while True:
 
         if len(randomInputSplit) == 2 and randomInputSplit[0].isdigit() and randomInputSplit[1].isdigit():
             if int(randomInputSplit[0]) >= int(randomInputSplit[1]):
-                # print("Invalid input: First number must be greater than second number\n")
+                print("Invalid input: First number must be greater than second number\n")
                 sentence = input()
             else:
                 toSend = sentence + " " + randomInput + "\r\n"
                 sentence = SendAndReceive(clientSocket, toSend)
         else:
-            # print("Invalid input: Enter two numbers\n")
+            print("Invalid input: Enter two numbers\n")
             sentence = input()
 
     elif sentence == "Add":
@@ -51,7 +51,7 @@ while True:
             toSend = sentence + " " + addInput + "\r\n"
             sentence = SendAndReceive(clientSocket, toSend)
         else:
-            # print("Invalid input: Enter two numbers\n")
+            print("Invalid input: Enter two numbers\n")
             sentence = input()
 
     elif sentence == "Subtract":
@@ -63,7 +63,7 @@ while True:
             toSend = sentence + " " + subtractInput + "\r\n"
             sentence = SendAndReceive(clientSocket, toSend)
         else:
-            # print("Invalid input: Enter two numbers\n")
+            print("Invalid input: Enter two numbers\n")
             sentence = input()
 
     else:
