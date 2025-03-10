@@ -8,7 +8,6 @@ def choises():
     print()
 
 def SendAndReceive(clientSocket, message):
-    choises()
     toSend = message + "\r\n"
     clientSocket.send(toSend.encode())
     response = clientSocket.recv(1024)
@@ -28,3 +27,4 @@ while True:
     if SendAndReceive == "Input numbers":
         numbers = input()
         SendAndReceive(clientSocket,numbers)
+

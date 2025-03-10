@@ -24,7 +24,7 @@ namespace TCP{
                             HandleIncomingMessage(writer,reader,request);
                         }
                         else{
-                            writer.Write($"Server: {request}");
+                            writer.Write($"Server response: {request}");
                         }
                     }
                     else{
