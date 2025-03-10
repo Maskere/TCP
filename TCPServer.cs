@@ -12,35 +12,64 @@ namespace TCP{
                 StreamWriter writer = new(ns);
                 writer.AutoFlush = true;
 
-                Random random = new();
-
                 while(isRunning){
-                    string? message = reader.ReadLine();
-                    string[]? splitMessage = message?.Split();
+                    string? request = reader.ReadLine();
 
-                    if(splitMessage?[0] == "Random" ||
-                            splitMessage?[0] == "Add" ||
-                            splitMessage?[0] == "Subtract"){
-                        HandleIncomingMessage(writer,splitMessage, random);
+                    if(request != null){
+                        request.Trim();
+
+                        if(request == "Random" ||
+                                request == "Add" ||
+                                request == "Subtract"){
+                            HandleIncomingMessage(writer,reader,request);
+                        }
+                        else{
+                            writer.Write($"Server: {request}");
+                        }
                     }
                     else{
-                        writer.Write(message);
+                        writer.Write("Bad request");
                     }
                 }
             }
         }
 
-        static void HandleIncomingMessage(StreamWriter writer, string[]? splitMessage, Random random){
-            if(int.TryParse(splitMessage?[1], out int firstResult)){
-                if(int.TryParse(splitMessage?[2].Trim(), out int secondResult)){
-                    if(splitMessage[0] == "Random"){
-                        writer.Write(random.Next(firstResult, secondResult + 1));
+        static void HandleIncomingMessage(StreamWriter writer, StreamReader reader, string? request){
+            Random random = new();
+            if(request != null){
+                writer.Write("Input numbers");
+
+                string? numbers = reader.ReadLine();
+
+                if(numbers != null){
+                    string[] splitNumbers = numbers.Split(" ");
+
+                    if(int.TryParse(splitNumbers?[0], out int firstResult)){
+                        if(int.TryParse(splitNumbers?[1].Trim(), out int secondResult)){
+                            if(request == "Random"){
+                                if(firstResult > secondResult){
+                                    writer.Write("First number:{0} numbers must be greater than second number:{1}",firstResult,secondResult);
+                                }
+                                else{
+                                    int randomResult = random.Next(firstResult, secondResult + 1);
+                                    writer.Write($"Random result: {randomResult}");
+                                }
+                            }
+                            else if(request == "Add"){
+                                int addResult = firstResult + secondResult;
+                                writer.Write($"Add result: {addResult}");
+                            }
+                            else if(request == "Subtract"){
+                                int subtractResult = firstResult - secondResult;
+                                writer.Write($"Subtract result: {subtractResult}");
+                            }
+                        }
+                        else{
+                            writer.Write("Second input: '{0}' must be a number",splitNumbers?[1]);
+                        }
                     }
-                    else if(splitMessage[0] == "Add"){
-                        writer.Write(firstResult + secondResult);
-                    }
-                    else if(splitMessage[0] == "Subtract"){
-                        writer.Write(firstResult - secondResult);
+                    else{
+                        writer.Write("First input: '{0}' must be a number",splitNumbers?[0]);
                     }
                 }
             }
