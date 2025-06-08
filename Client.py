@@ -1,30 +1,22 @@
 from socket import *
 
-def choises():
-    print("Choose one: ")
-    print("Random")
-    print("Add")
-    print("Subtract")
-    print()
+def SendAndRecieve(socket,message):
+    toSend = message.encode()
+    socket.send(toSend)
+    response = socket.recv(1024).decode()
+    print(response)
+    return input()
 
-def SendAndReceive(clientSocket, message):
-    toSend = message + "\r\n"
-    clientSocket.send(toSend.encode())
-    response = clientSocket.recv(1024)
-    print(response.decode())
-    return response
 
-serverName = "localhost"
-serverPort = 7
-clientSocket = socket(AF_INET, SOCK_STREAM)
+serverName = "" #Remember to insert the server interface here!!!!
+serverPort = 13000
+clientSocket = socket(AF_INET,SOCK_STREAM)
 clientSocket.connect((serverName,serverPort))
-choises()
+sentence = input()
 
 while True:
-    sentence = input()
-    SendAndReceive(clientSocket,sentence)
-
-    if SendAndReceive == "Input numbers":
-        numbers = input()
-        SendAndReceive(clientSocket,numbers)
-
+    if len(sentence) == 0:
+        emptyMessage = " "
+        sentence = SendAndRecieve(clientSocket,emptyMessage)
+    else:
+        sentence = SendAndRecieve(clientSocket,sentence)
